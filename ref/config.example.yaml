@@ -1,0 +1,34 @@
+# 飞书项目排期助手 — 用户配置
+#
+# 使用方法：
+#   cp config.example.yaml config.yaml
+#   编辑 config.yaml 填入你的实际值
+#
+# 获取各项值的方式见下方注释
+
+# MCP server 标识（与你 agent 环境中注册的 server name 一致）
+mcp_server: feishu-project
+
+# 你的姓名
+user_name: ""
+
+# 飞书 user_key（通过 search_user_info 传姓名或邮箱获取）
+user_key: ""
+
+# 飞书项目空间 project_key（通过 search_project_info 传空间名获取）
+project_key: ""
+
+# 飞书项目空间名称（用于 MQL 查询中的 FROM 子句）
+project_name: ""
+
+# 你负责的节点名称（如 FE开发、RD开发、BE开发、QA测试 等）
+node_name: ""
+
+# 节点 state_key（通过 list_workitem_field_config 查询，格式为 state_XX）
+node_state_key: ""
+
+# 周排期容量上限（超过此值触发 fix 修复，默认 6）
+weekly_capacity: 6
+
+# 修复目标总分（fix 功能的目标值，默认 5.5）
+fix_target: 5.5
