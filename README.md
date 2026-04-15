@@ -76,13 +76,16 @@ node_state_key: "对应的 state_key（如 state_59）"
 ## 文件结构
 
 ```
-├── SKILL.md                    # Agent 入口（agent 读这个）
+├── SKILL.md                    # Agent 入口 — 功能路由（agent 首次读这个）
 ├── README.md                   # 人类文档（你在读这个）
-└── ref/
+└── ref/                        # 按需加载 — agent 触发具体功能时才读取
     ├── config.example.yaml     # 配置模板
-    ├── batch-schedule.md       # 批量排期算法细节
+    ├── fix.md                  # 修复超载排期步骤
+    ├── batch-schedule.md       # 批量排期算法
     ├── preview.md              # 甘特图渲染规则
-    └── timestamps.md           # 时间戳计算公式与校验表
+    ├── transition-today.md     # 批量流转节点步骤
+    ├── write-rules.md          # 写操作规范 + 常见问题
+    └── timestamps.md           # 时间戳计算公式
 ```
 
 ## 适配你的角色
