@@ -17,15 +17,29 @@ AI Agent Skill，通过飞书项目 MCP 管理你的节点排期与估分。
 ## 前置条件
 
 - 已接入 **飞书项目 MCP Server**（skill 的所有操作通过 MCP 工具完成）
-- Agent 环境支持 skill 加载（如 [OpenClaw](https://github.com/nicepkg/openclaw) 等）
+- Agent 环境支持 skill 加载
 
 ## 安装
 
-将本仓库克隆到你的 agent skills 目录：
+### OpenClaw
 
 ```bash
 git clone https://github.com/HuangMou0828/LarkWorkWizard.git ~/.openclaw/skills/feishu-project
 ```
+
+### Claude Code
+
+```bash
+git clone https://github.com/HuangMou0828/LarkWorkWizard.git ~/.claude/skills/feishu-project
+```
+
+### Cursor
+
+```bash
+git clone https://github.com/HuangMou0828/LarkWorkWizard.git ~/.cursor/skills/feishu-project
+```
+
+> 不同 agent 的 skill 目录可能不同，以上为常见约定路径。如果你的环境使用其他路径，克隆到对应目录即可。配置步骤相同。
 
 ## 配置
 
@@ -84,6 +98,43 @@ node_state_key: "对应的 state_key（如 state_59）"
 | 设计 | `UI设计` |
 
 `node_state_key` 需通过 `list_workitem_field_config` 查询获取，每个空间不同。
+
+## 验证（不修改飞书数据）
+
+首次使用或修改 skill 后，建议先验证再用于实际操作。
+
+### 第一步：验证只读功能
+
+以下功能只查询、不写入，可以放心运行：
+
+```
+你：本周估分多少？          ← 验证 schedule（查询排期）
+你：看看排期                ← 验证 preview（甘特图渲染）
+```
+
+检查返回结果是否与飞书项目中看到的一致。
+
+### 第二步：dry-run 验证写入功能
+
+对任何写入操作加上 **"dry-run"**，skill 会完整执行查询和计算，但**跳过实际写入**，只展示将要执行的操作：
+
+```
+你：dry-run 帮我排下周的排期       ← 验证 batch-schedule 算法
+你：dry-run 修复排期               ← 验证 fix 调整方案
+你：dry-run 流转今日截止的节点      ← 验证 transition-today 查询
+```
+
+dry-run 模式下你会看到完整的确认表格和操作计划，但不会调用 `update_node` 或 `transition_node`。确认输出符合预期后，去掉 "dry-run" 重新执行即可。
+
+### 验证清单
+
+| 检查项 | 怎么验证 |
+|--------|---------|
+| config.yaml 配置正确 | `schedule` 能查到你的排期数据 |
+| MQL 查询正常 | `preview` 能按迭代分组显示 |
+| 估分计算准确 | 对比 `schedule` 结果与飞书项目页面 |
+| 时间戳无误 | `dry-run batch-schedule` 的日期与预期一致 |
+| 节点流转目标正确 | `dry-run transition-today` 显示的下一节点正确 |
 
 ## 贡献
 
