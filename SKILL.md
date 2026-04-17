@@ -1,11 +1,11 @@
 ---
-name: feishu-project
+name: lark-work-wizard
 description: >
   飞书项目排期管理：查询周排期估分、修复超载、批量智能排期、
   排期预览甘特图、批量流转今日截止的工作节点到下一节点。
 ---
 
-# 飞书项目排期助手
+# LarkWorkWizard — 飞书项目排期助手
 
 ## 快速开始
 

@@ -24,19 +24,19 @@ AI Agent Skill，通过飞书项目 MCP 管理你的节点排期与估分。
 ### OpenClaw
 
 ```bash
-git clone https://github.com/HuangMou0828/LarkWorkWizard.git ~/.openclaw/skills/feishu-project
+git clone https://github.com/HuangMou0828/LarkWorkWizard.git ~/.openclaw/skills/lark-work-wizard
 ```
 
 ### Claude Code
 
 ```bash
-git clone https://github.com/HuangMou0828/LarkWorkWizard.git ~/.claude/skills/feishu-project
+git clone https://github.com/HuangMou0828/LarkWorkWizard.git ~/.claude/skills/lark-work-wizard
 ```
 
 ### Cursor
 
 ```bash
-git clone https://github.com/HuangMou0828/LarkWorkWizard.git ~/.cursor/skills/feishu-project
+git clone https://github.com/HuangMou0828/LarkWorkWizard.git ~/.cursor/skills/lark-work-wizard
 ```
 
 > 不同 agent 的 skill 目录可能不同，以上为常见约定路径。如果你的环境使用其他路径，克隆到对应目录即可。配置步骤相同。
@@ -44,7 +44,7 @@ git clone https://github.com/HuangMou0828/LarkWorkWizard.git ~/.cursor/skills/fe
 ## 配置
 
 ```bash
-cd ~/.openclaw/skills/feishu-project
+cd ~/.openclaw/skills/lark-work-wizard
 cp ref/config.example.yaml ref/config.yaml
 ```
 
