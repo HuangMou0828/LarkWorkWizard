@@ -19,6 +19,23 @@ cp ref/config.example.yaml ref/config.yaml
 
 ---
 
+## Args 快捷路由
+
+通过 `/lark-work-wizard <cmd>` 调用时，**args 优先**，直接执行对应功能，无需匹配触发词：
+
+| 命令 | 说明 | 示例 |
+|------|------|------|
+| `week [this-week\|next-week\|自然语言]` | 查询周排期估分，默认本周 | `week` / `week next-week` / `week 下周` |
+| `fix [this-week\|next-week\|自然语言]` | 修复指定周的超载排期，默认本周 | `fix` / `fix next-week` / `fix 下周` |
+| `batch [this-week\|next-week\|自然语言]` | 批量智能排期指定周，默认本周 | `batch` / `batch next-week` / `batch 下周` |
+| `preview` | 本周+下周排期预览 | `preview` |
+| `clear` | 批量流转今日截止节点 | `clear` |
+| `clear-all` | 批量流转今日截止节点（含联调、自测额外节点） | `clear-all` |
+
+未传 args 时，回退到下方触发词路由。
+
+---
+
 ## 执行约束
 
 - **MCP Server**：`feishu-project`（以 `ref/config.yaml` 中 `mcp_server` 为准）
@@ -47,11 +64,15 @@ cp ref/config.example.yaml ref/config.yaml
 
 **触发词**：修复排期、排期超载、帮我调整估分
 
+**时间范围**：从用户指令中提取本周 / 下周；args 模式下从 `this-week` / `next-week` 参数读取；缺省时询问用户确认。
+
 **执行前读取详细步骤**：`ref/fix.md`
 
 ### batch-schedule — 批量智能排期
 
 **触发词**：帮我排期、批量排期、安排排期、规划这周/下周的排期
+
+**时间范围**：从用户指令中提取本周 / 下周；args 模式下从 `this-week` / `next-week` 参数读取；缺省时询问用户确认。
 
 **执行前读取详细算法**：`ref/batch-schedule.md`
 
@@ -67,7 +88,16 @@ cp ref/config.example.yaml ref/config.yaml
 
 > 通过 `transition_node` 将今日排期截止的节点流转到下一节点。不修改排期日期、不修改估分。
 
-**执行前读取详细步骤**：`ref/transition-today.md`
+**执行前读取详细步骤**：`ref/transition-today.md`（功能五）
+
+### transition-today-all — 批量流转今日截止节点（含额外节点）
+
+**触发词**：clear-all、全部流转、联调自测也一起流转、今天所有节点都流转
+
+> 在 `transition-today` 基础上，额外处理 `extra_clear_nodes` 配置的节点（联调、自测）。
+> 额外节点：有排期看排期是否今日到期，无排期直接视为今日到期。
+
+**执行前读取详细步骤**：`ref/transition-today.md`（功能六 clear-all）
 
 ---
 

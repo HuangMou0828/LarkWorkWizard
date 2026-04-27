@@ -32,3 +32,8 @@ weekly_capacity: 6
 
 # 修复目标总分（fix 功能的目标值，默认 5.5）
 fix_target: 5.5
+
+# clear-all 额外流转的节点名称列表（无排期则视为今日到期）
+extra_clear_nodes:
+  - 联调
+  - 自测
